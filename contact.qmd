@@ -1,0 +1,44 @@
+---
+title: "Dr. Flávia Lombardi Lopes"
+about:
+  id: contact
+  template: jolla
+  image: assets/fll.jpeg
+---
+
+::: {#contact}
+{{< fa regular envelope >}} [flavia.lopes\@unesp.br](mailto:flavia.lopes@unesp.br)
+
+{{< fa brands instagram >}}  [@epilab.fmva](https://www.instagram.com/epilab.fmva)
+
+{{< fa brands tiktok >}} [@epilab.fmva](https://www.tiktok.com/@epilab.fmva)
+
+{{< fa brands github >}} [@epigenomicslab-unesp](https://github.com/epigenomicslab-unesp)
+
+{{< fa location-dot >}} Department of Production and Animal Health, São Paulo State University, Brazil
+:::
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: make map
+
+library(leaflet)
+
+icon <- makeIcon(
+  iconUrl = "assets/epilab_logo.png",
+  iconWidth = 40,
+  iconHeight = 40
+)
+
+leaflet() |>
+  addTiles() |>
+  setView(lng = -50.439099 , lat = -21.186921, zoom = 16) |>
+  addMarkers(
+    lng = -50.439099,
+    lat = -21.186921,
+    icon = icon,
+    popup = "<b>Epilab</b>"
+  )
+```

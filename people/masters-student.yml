@@ -1,0 +1,10 @@
+    - #path: https://drganghe.github.io/quarto-academic-website-template
+      image: "assets/jhonatan.jpeg"
+      title: "Jhonatan Henrique"
+      lastname: "Lucio"
+#      author: 
+      subtitle: "Masters Student"
+#      date: "2024-03-12"
+      categories: [Masters Student] 
+      started: "2026"
+      ended: "2028"

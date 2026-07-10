@@ -1,0 +1,71 @@
+    - title: "Amanda Furlan"
+      lastname: "Furlan"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2021"
+      ended: "2025"
+
+    - title: "Maria Fernanda Lopes"
+      lastname: "Lopes"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2021"
+      ended: "2025"
+
+    - title: "Natália Scaramele"
+      lastname: "Scaramele"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2019"
+      ended: "2023"
+
+    - title: "Flávia Athayde"
+      lastname: "Athayde"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2018"
+      ended: "2022"
+      
+    - title: "Marco Antonio Sousa"
+      lastname: "Sousa"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2019"
+      ended: "2023"
+      
+    - title: "Leandro Encarnação Garcia"
+      lastname: "Garcia"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2015"
+      ended: "2018"
+      
+    - title: "Erivelto Correa de Araújo Júnior"
+      lastname: "Araújo"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2015"
+      ended: "2018"
+      
+    - title: "Mariângela Bueno Cordeiro"
+      lastname: "Cordeiro"
+#      author: 
+      subtitle: "PhD Alumni"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2014"
+      ended: "2017"

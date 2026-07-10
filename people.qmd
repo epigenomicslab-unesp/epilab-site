@@ -1,0 +1,77 @@
+---
+title: "Meet the Epilab team"
+image: assets/group.jpeg
+page-layout: full
+date-format: "YYYY-MM"
+listing:  
+#  template: item-default-external.ejs
+- id: pi
+  type: grid
+  fields: [image, title, subtitle, description]
+  image-height: 200px
+  categories: true
+#  sort-ui: true
+#  filter-ui: true
+  contents:
+    - /people/pi.yml
+
+- id: lab-member
+  sort: "lastname asc"
+  type: grid
+  fields: [image, title, subtitle]
+  grid-item-align: center
+  grid-columns: 4
+  image-height: 200px
+  categories: true
+#  sort-ui: true
+#  filter-ui: true
+  contents: 
+    - /people/phd-student.yml
+    - /people/masters-student.yml
+    - /people/undergraduate-student.yml
+
+- id: lab-alumni
+  sort: 
+    - "ended desc"
+    - "lastname asc"  
+  type: table
+  fields: [title, subtitle, ended]
+  grid-item-align: center  
+  grid-columns: 4
+  image-height: 25px
+  field-display-names: 
+      title: "Name"
+      subtitle: "Role"
+      ended: "Ended"
+#  categories: true
+#  sort-ui: true
+#  filter-ui: true
+  contents: 
+    - /people/phd-alumni.yml
+    - /people/masters-alumni.yml
+    - /people/undergraduate-alumni.yml
+    - /people/postdoc-alumni.yml
+
+page-navigation: false
+title-block-banner: false
+toc: false
+
+format:
+  html:
+    link-external-newwindow: true
+---
+
+## Principal Investigator
+
+::: {#pi}
+:::
+
+## Team
+
+::: {#lab-member}
+:::
+
+## Alumni
+
+::: {#lab-alumni}
+:::

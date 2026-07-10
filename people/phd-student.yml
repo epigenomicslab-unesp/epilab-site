@@ -1,0 +1,54 @@
+    - path: https://orcid.org/0000-0002-8635-1674
+      image: "assets/ju.jpeg"
+      title: "Juliana Felix"
+      lastname: "Felix"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2023"
+      ended: "2027"
+
+    - path: https://orcid.org/0000-0003-4371-1446
+      image: "assets/mari.jpeg"
+      title: "Mariana Cordeiro"
+      lastname: "Cordeiro"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2023"
+      ended: "2027"
+      
+    - path: https://orcid.org/0000-0001-8444-1898
+      image: "assets/matheus.jpeg"
+      title: "Matheus Fujimura"
+      lastname: "Soares"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2023"
+      ended: "2027"
+      
+    - path: https://orcid.org/0009-0009-8891-1012
+      image: "assets/lu.jpeg"
+      title: "Luana Zutin"
+      lastname: "Zutin"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2026"
+      ended: "2029"
+      
+    - path: https://orcid.org/0009-0008-9451-039X
+      image: "assets/joao.jpeg"
+      title: "João Pedro Ronchezelli"
+      lastname: "Ronchezelli"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2026"
+      ended: "2030"

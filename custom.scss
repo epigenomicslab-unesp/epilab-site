@@ -1,0 +1,23 @@
+/*-- scss:defaults --*/
+// Base document colors
+$headings-font-weight: 800;
+$link-color: #0039e3;
+$navbar-bg: #ed7e07;
+$navbar-fg: #ffffff;
+$navbar-hl: #ffffff;
+
+
+/*-- scss:rules --*/
+#title-block-header {
+  text-align: center;
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.15rem;
+  font-weight: 600;
+}

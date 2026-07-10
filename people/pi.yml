@@ -1,0 +1,9 @@
+    - path: https://orcid.org/0000-0002-3173-3712
+      image: "assets/fll.jpeg"
+      title: "Flávia Lombardi Lopes"
+      lastname: "Lopes"
+#      author: 
+      subtitle: "Researcher"
+#      date: "2024-03-12"
+      categories: [PI] 
+      description: "Ph.D. Reproduction | Université de Montréal | 2005 <br> MSc Physiology of Reproduction | University of Florida | 2000 <br> BSc Veterinary Medicine | UNESP | 1998"

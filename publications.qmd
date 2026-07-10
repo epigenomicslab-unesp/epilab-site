@@ -1,0 +1,179 @@
+---
+pagetitle: "Publications"
+toc: false
+execute: 
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(tidyverse)
+library(RefManageR)
+library(htmltools)
+
+`%||%` <- function(a, b) if (is.null(a) || length(a) == 0) b else a
+nz_chr <- function(x) ifelse(is.na(x) | trimws(x) == "", NA_character_, x)
+
+strip_braces <- function(x) {
+  if (is.null(x) || length(x) == 0) return(NA_character_)
+  y <- as.character(x)
+  gsub("[{}]", "", y, perl = TRUE)
+}
+
+fmt_authors_card <- function(entry) {
+  au <- entry$author
+  if (is.null(au) || length(au) == 0) return(NA_character_)
+  fmt_one <- function(a) {
+    fam_vec <- a$family
+    if (length(fam_vec)) paste(as.character(fam_vec), collapse = " ") else ""
+  }
+  pieces <- vapply(au, fmt_one, character(1))
+  pieces <- pieces[nzchar(pieces)]
+  if (!length(pieces)) return(NA_character_)
+  if (length(pieces) == 1) pieces
+  else paste(paste(pieces[-length(pieces)], collapse = ", "), "&", pieces[length(pieces)])
+}
+
+normalize_link <- function(x) {
+  y <- as.character(x)
+  y[is.na(y)] <- NA_character_
+  y <- trimws(y)
+
+  y <- gsub("\\\\_", "_", y)
+  
+  y[y == "" | tolower(y) == "na"] <- NA_character_
+
+  ok <- !is.na(y)
+
+  doi_pref <- ok & grepl("^doi:\\s*", y, ignore.case = TRUE)
+  y[doi_pref] <- sub("^doi:\\s*", "", y[doi_pref], ignore.case = TRUE)
+  bare_doi <- ok & grepl("^10\\.", y)
+  y[bare_doi] <- paste0("https://doi.org/", y[bare_doi])
+
+  arxiv_pref <- ok & grepl("^arxiv:\\s*", y, ignore.case = TRUE)
+  if (any(arxiv_pref)) {
+    ids <- sub("^arxiv:\\s*", "", y[arxiv_pref], ignore.case = TRUE)
+    ids <- sub("^([^\\s]+).*", "\\1", ids)
+    y[arxiv_pref] <- paste0("https://arxiv.org/abs/", ids)
+  }
+
+  domain_like <- ok & grepl("^(www\\.|[A-Za-z0-9.-]+\\.[A-Za-z]{2,})(/|$)", y)
+  no_scheme   <- ok & !grepl("^https?://", y, ignore.case = TRUE)
+  needs_scheme <- domain_like & no_scheme
+  y[needs_scheme] <- paste0("https://", y[needs_scheme])
+
+  y
+}
+```
+
+```{r}
+#| label: build-rows
+
+bib  <- ReadBib("publications.bib", check = FALSE)
+keys <- names(bib)
+
+extra_links <- tibble(key = character(), preprint = character(), materials = character())
+
+rows <- tibble(
+  key = keys,
+  entry = lapply(keys, function(k) bib[k])
+) |>
+  mutate(
+    title        = map_chr(entry, ~ strip_braces(.x$title %||% "")),
+    authors_card = map_chr(entry, fmt_authors_card),
+    year         = map_chr(entry, ~ {
+      y <- .x$year %||% .x$date %||% ""
+      if (is.list(y)) y$year %||% "" else as.character(y)
+    }),
+    venue        = map_chr(entry, ~ strip_braces(.x$journal %||% .x$booktitle %||% .x$publisher %||% "")),
+    doi          = map_chr(entry, ~ .x$doi %||% NA_character_),
+    url_fallback = map_chr(entry, ~ .x$url %||% NA_character_)
+  ) |>
+  mutate(
+    doi_url = normalize_link(
+      if_else(
+        nzchar(doi),
+        paste0("https://doi.org/", doi),
+        url_fallback
+      )
+    )
+  ) |>
+  arrange(desc(year), title)
+```
+
+```{css}
+/* Group header */
+.year-group { margin: 28px 0 8px; }
+.year-title { margin: 0; font-size: 1.35rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px; }
+
+/* Card + layout */
+.pub-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 16px 10px 16px;
+  margin: 14px 0;
+  background: #fff;
+}
+.pub-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
+.pub-title a { text-decoration: none; }
+.pub-meta  { color: #555; font-size: 0.95rem; margin-bottom: 8px; }
+```
+
+```{r}
+#| label: render-publications
+
+build_card <- function(
+  key, title, authors_card, year, venue,
+  doi_url
+  ) {
+  ttl_node <- if (isTRUE(nzchar(doi_url %||% ""))) {
+    tags$div(class = "pub-title", tags$a(title, href = doi_url, target = "_blank", rel = "noopener"))
+  } else {
+    tags$div(class = "pub-title", title)
+  }
+
+  meta <- tags$div(
+    class = "pub-meta",
+    
+    if (nzchar(authors_card))
+    tagList(
+      HTML(authors_card),
+      tags$br()
+    ),
+
+  tags$em(
+    paste0(venue, " • ", year)
+  )
+   
+  )
+
+
+  tags$div(class = "pub-card", `data-key` = key,
+           ttl_node, meta)
+}
+
+years <- rows |>
+  distinct(year) |>
+  arrange(desc(year)) |>
+  pull(year)
+
+groups <- lapply(years, function(y) {
+  subset <- rows |> filter(year == y)
+
+  subset_min <- subset |>
+    select(
+      key, title, authors_card, year, venue,
+      doi_url
+    )
+  cards <- pmap(subset_min, build_card)
+
+  tags$div(
+    class = "year-group",
+    tags$h2(class = "year-title anchored", id = paste0("y-", y), str_to_title(y)),
+    tags$div(cards)
+  )
+})
+
+browsable(tags$div(groups))
+```
