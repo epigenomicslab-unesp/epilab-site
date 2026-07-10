@@ -26,10 +26,10 @@ jobs:
         with:
           r-version: '4.4.2'
       
-      - name: Install system dependencies (GDAL, PROJ, GEOS)
+      - name: Install system dependencies (GDAL, PROJ, GEOS, UDUNITS)
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libsqlite3-dev
+          sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libsqlite3-dev libudunits2-dev
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
