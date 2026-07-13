@@ -52,3 +52,14 @@
       categories: [PhD Student] 
       started: "2026"
       ended: "2030"
+      
+    - path: https://orcid.org/0000-0001-6907-409X
+      image: "assets/brayan.jpeg"
+      title: "Brayan Kurahara"
+      lastname: "Kurahara"
+#      author: 
+      subtitle: "PhD Student"
+#      date: "2024-03-12"
+      categories: [PhD Student] 
+      started: "2026"
+      ended: "2030"
